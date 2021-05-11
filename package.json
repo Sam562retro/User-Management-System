@@ -1,0 +1,18 @@
+{
+  "name": "user_management_system",
+  "version": "1.0.0",
+  "description": "A user management system using node js",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "author": "Soham Gupta",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
