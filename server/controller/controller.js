@@ -3,16 +3,32 @@ const userDB = require('./../model/model');
 // create and save new user
 exports.create = (req, res) => {
     // validate request
-    if(!req.body){
+    if (!req.body) {
         res.send({
             message: 'content cannot be empty'
         })
         return
     }
     // new use
-    const user = new userDB({name: req.body.name, email: req.body.email, gender : req.body.gender, status : req.body.status});
+    // let genderBoolean, statusBoolean;
+    // if(req.body.gender == 'Male'){
+    //     genderBoolean = true;
+    // }else{genderBoolean = false;}
+    // if(req.body.status == 'Active'){
+    //     statusBoolean = true;
+    // }else{statusBoolean = false;}
+    const user = new userDB({
+        name: req.body.name,
+        email: req.body.email,
+        gender: req.body.gender,
+        status: req.body.status
+    });
     // save user
-    userDB.save(user).then(data  => {res.redirect('/add')}).catch(err => {res.send({message: err.message || 'Some error occoured while adding user to database'})})
+    user.save(user).then(data => {
+        res.redirect('/add')
+    }).catch(err => {
+        res.send({message: err.message || 'Some error occoured while adding user to database'})
+    })
 }
 // retrieve and return all users
 exports.find = (req, res) => {

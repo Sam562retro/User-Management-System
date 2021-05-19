@@ -10,12 +10,12 @@ const schema = new mongo.Schema({
         required: true
     },
     gender: {
-        type: Boolean,
+        type: String,
         required: true
     },
     status : {
-        type : Boolean,
-        required : true
+        type: String,
+        required: true
     }
 });
 

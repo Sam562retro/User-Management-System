@@ -1,15 +1,20 @@
 const app = require('express').Router();
+const service = require('./../services/render');
+const controller = require('./../controller/controller');
 
-app.get('/' , (req, res) => {
-    res.render('index');
-})
+app.get('/', service.homeRoutes);
 
-app.get('/update', (req, res) => {
-    res.render('update_user');
-})
+app.get('/update', service.update_user);
 
-app.get('/add', (req, res) => {
-    res.render('add_user');
-})
+app.get('/add', service.add_user);
+
+// api routes
+app.post('/api/users', controller.create);
+
+app.get('/api/users', controller.find);
+
+app.put('/api/users/:id', controller.update);
+
+app.delete('/api/users/delete/:id', controller.delete);
 
 module.exports = app;
