@@ -1,27 +1,39 @@
-<%- include('partials/_header')%>
-    <main id='mainSection'>
-        <div class="container">
-            <div class="box-nav d-flex justify-between">
-                <a class="border-shadow" href='/add'><span class="text-gradient">New User</span></a>
-            </div>
-            
-            <form method="post" action="/">
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Gender</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                        <tbody>
-                            <%- include('partials/_show')%>
-                        </tbody>
-                    </thead>
-                </table>
-            </form>
+<%- include('partials/_header') %>
+<main id='mainSection'>
+    <div class="container">
+        <div class="box-nav d-flex justify-between">
+            <a class="border-shadow" href='/add'><span class="text-gradient">New User</span></a>
         </div>
-    </main>
-<%- include('partials/_footer')%>
+
+        <form method="post" action="/">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                <tbody>
+                <% users.forEach(function(data){ %>
+                    <tr>
+                        <td><%= users.indexOf(data) + 1 %></td>
+                        <td><%= data.name %></td>
+                        <td><%= data.email %></td>
+                        <td><%= data.gender %></td>
+                        <td><%= data.status %></td>
+                        <td>
+                            <a class="btn border-shadow update" href="/update?id=<%= data._id %>"><span>Edit</span></a>
+                            <a class="btn border-shadow delete" data-id= <%= data._id %>><span>Del</span></a>
+                        </td>
+                    </tr>
+                <% }) %>
+                </tbody>
+                </thead>
+            </table>
+        </form>
+    </div>
+</main>
+<%- include('partials/_footer') %>

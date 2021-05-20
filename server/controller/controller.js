@@ -9,22 +9,17 @@ exports.create = (req, res) => {
         })
         return
     }
-    // new use
-    // let genderBoolean, statusBoolean;
-    // if(req.body.gender == 'Male'){
-    //     genderBoolean = true;
-    // }else{genderBoolean = false;}
-    // if(req.body.status == 'Active'){
-    //     statusBoolean = true;
-    // }else{statusBoolean = false;}
+    let genderBoolean, statusBoolean;
+    genderBoolean = req.body.gender === 'Male';
+    statusBoolean = req.body.status === 'Active';
     const user = new userDB({
         name: req.body.name,
         email: req.body.email,
-        gender: req.body.gender,
-        status: req.body.status
+        gender: genderBoolean,
+        status: statusBoolean
     });
     // save user
-    user.save(user).then(data => {
+    user.save().then(data => {
         res.redirect('/add')
     }).catch(err => {
         res.send({message: err.message || 'Some error occoured while adding user to database'})
@@ -38,13 +33,19 @@ exports.find = (req, res) => {
 
 //update a new user by user id
 exports.update = (req,res) => {
-    if(!req.body){
+    if (!req.body) {
         return res.send({
             message: 'data to update cannot be empty'
         })
     }
     const id = req.params.id;
-    userDB.findByIdAndUpdate(id,req.body).then(data => {if(!data){res.send({message : `There is no user with id ${id}`})}else{res.send(data)}}).catch(err => res.send({message : err.message || 'error updating user data'}));
+    userDB.findByIdAndUpdate(id, req.body).then(data => {
+        if (!data) {
+            res.send({message: `There is no user with id ${id}`})
+        } else {
+            res.redirect('/')
+        }
+    }).catch(err => res.send({message: err.message || 'error updating user data'}));
 }
 
 // delete a user with a id
