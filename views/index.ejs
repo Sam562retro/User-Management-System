@@ -22,11 +22,11 @@
                         <td><%= users.indexOf(data) + 1 %></td>
                         <td><%= data.name %></td>
                         <td><%= data.email %></td>
-                        <td><%= data.gender %></td>
-                        <td><%= data.status %></td>
+                        <td><% if(data.gender){ %>Male<%}else{%>Female<%}%></td>
+                        <td><% if(data.status){ %>Active<%}else{%>Inactive<%}%></td>
                         <td>
-                            <a class="btn border-shadow update" href="/update?id=<%= data._id %>"><span>Edit</span></a>
-                            <a class="btn border-shadow delete" data-id= <%= data._id %>><span>Del</span></a>
+                            <a class="btn border-shadow update" href="/update/<%= data._id %>"><span>Edit</span></a>
+                            <a class="btn border-shadow delete" href="/api/users/delete/<%= data._id %>" ><span>Del</span></a>
                         </td>
                     </tr>
                 <% }) %>

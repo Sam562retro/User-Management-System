@@ -10,7 +10,44 @@
                 <h2 class="text-dark">New User</h2>
                 <span class="text-light">use the bellow form to create a new user</span>
             </div>
-            <%- include('partials/_form')%>
+            <form method="post" autocomplete='off' id="add_user" action="/api/users">
+                <div class="new_user">
+                    <div class="form-group">
+                        <label for="name" class="text-light">Name</label>
+                        <input type="hidden" name="id" value="">
+                        <input type="text" name="name" value="" placeholder="enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="text-light">Email</label>
+                        <input type="email" name="email" value="" placeholder="enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light">Gender</label>
+                        <div class="radio inline">
+                            <input type="radio" id="radio-2" name="gender" value="Male" required>
+                            <label for="radio-2" class="radio-label">Male</label>
+                        </div>
+                        <div class="radio inline">
+                            <input type="radio" id="radio-3" name="gender" value="Female" required>
+                            <label for="radio-3" class="radio-label">Female</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-light">Status</label>
+                        <div class="radio inline">
+                            <input type="radio" id="radio-4" name="status" value="Active" required>
+                            <label for="radio-4" class="radio-label">Active</label>
+                        </div>
+                        <div class="radio inline">
+                            <input type="radio" id="radio-5" name="status" value="Inactive" required>
+                            <label for="radio-5" class="radio-label">Inactive</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-dark update" value="Add User">
+                    </div>
+                </div>
+            </form>
         </div>
     </main>
 <%- include('partials/_footer')%>

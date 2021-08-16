@@ -1,5 +1,20 @@
 const userDB = require('./../model/model');
 
+exports.showAll = (req, res) => {
+    userDB.find().then(data => {
+        res.render('index', {users : data});
+    }).catch(err => {
+        res.send('Their was an error retrieving data from databse');
+    })
+}
+
+exports.updateView = (req, res) => {
+    userDB.findById(req.params.id).then(data => {
+        res.render('update_user', {user: data});
+    }).catch(err => {
+        res.send({message : 'Their was an error retrieving user details from the databse', err});
+    })
+}
 // create and save new user
 exports.create = (req, res) => {
     // validate request
@@ -29,8 +44,6 @@ exports.create = (req, res) => {
 exports.find = (req, res) => {
     userDB.find().then(users => { res.send(users)}).catch(err => {res.send({message: err.message || 'Some error occoured while retrieving users from database'})})
 }
-
-
 //update a new user by user id
 exports.update = (req,res) => {
     if (!req.body) {
@@ -47,9 +60,8 @@ exports.update = (req,res) => {
         }
     }).catch(err => res.send({message: err.message || 'error updating user data'}));
 }
-
 // delete a user with a id
 exports.delete = (req, res) => {
     const id = req.params.id;
-    userDB.findByIdAndDelete(id).then(data => {if(!data){res.send({message: `There is no user with this id ${id}`})}else{res.send({message : 'user deleted succesfully'})}}).catch(err => {res.send({message : `could'nt delete user with id ${id}`})});
+    userDB.findByIdAndDelete(id).then(data => {if(!data){res.send({message: `There is no user with this id ${id}`})}else{res.redirect('/')}}).catch(err => {res.send({message : `could'nt delete user with id ${id}`})});
 }
